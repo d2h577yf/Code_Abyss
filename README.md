@@ -18,6 +18,6 @@
 
 最后引用“Linux圣经中的一句话”:
 
-> <span style="color: #0BDBE9  ;size =600;">Do one thing and do it well</span>
+> <span style="color: #0BDBE9  ;font-size :600%;">Do one thing and do it well</span>
 
 ![code](https://www.jianguoyun.com/c/tblv2/qVyWV-sCDYkIM_XvJXiKhP0CEEBIJ8CW4AQrXPxR9FJ_Z8gQT8iakdVq8XSi-3HyV55yak2c/uVRXb1Olc0aP5CYrGsqknPQTFOMNMS1GKPSP_3_TZp8/l)
