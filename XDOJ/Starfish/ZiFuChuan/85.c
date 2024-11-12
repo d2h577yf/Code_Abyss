@@ -37,15 +37,9 @@ int main(){
         }
     }
 
-    if(strlen(S1) == 0 && strlen(S2) == 0){
-        similarity = 0;
-    }else{
-        similarity = 2.0 * max / (float)(strlen(S1) + strlen(S2));
-    }   
+        similarity = 2.0 * (double)max / (double)(strlen(S1) + strlen(S2));
 
-    //printf("%d %d\n",strlen(S1),strlen(S2));
-
-    printf("%.3f",similarity);
+    printf("%.3f\n",similarity);
 
     return 0;
 }
