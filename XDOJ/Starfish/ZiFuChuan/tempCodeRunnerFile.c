@@ -1,0 +1,1 @@
+    memset(lock,0,sizeof(lock));
