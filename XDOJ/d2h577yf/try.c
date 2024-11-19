@@ -1,6 +1,7 @@
 #include <stdio.h>
 int main() {
-  int n, a[200][200] = {0}, i, j, number = 1, b[101] = {0}, k, ti, tj, flag = 0;
+  int n, a[270][270] = {0}, i, j, number = 1, b[1000] = {0}, k, ti, tj,
+         flag = 0;
   scanf("%d", &n);
   for (i = 0; i < n; i++) {
     scanf("%d", &a[i][0]);
@@ -17,16 +18,26 @@ int main() {
   }
   for (j = 2; j < b[0] + 2; j++) {
     for (i = 0; i < n; i++) {
-      if (a[i][j] != 0) {
+      if (a[i][j] == -1) {
         a[i][j] = number;
         number++;
         if (a[i][j - 1] == number - 2) {
-          a[i][j] = number;
-          number += 2;
-          ti = i;
-          tj = j;
-          flag = 1;
-          break;
+          if (i == n - 1) {
+            a[i][j] = number;
+            number += 2;
+            ti = i;
+            tj = j;
+            flag = 1;
+            break;
+          } else {
+            a[i][j - 1]++;
+            a[i][j] = number + 1;
+            number += 3;
+            ti = i;
+            tj = j;
+            flag = 1;
+            break;
+          }
         }
       }
     }
