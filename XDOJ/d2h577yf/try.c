@@ -1,64 +1,69 @@
+
+#include <ctype.h>
 #include <stdio.h>
+#include <string.h>
+
+void toUpper(char *str) {
+  for (int i = 0; str[i] != '\0'; i++) {
+    str[i] = toupper((unsigned char)str[i]);
+  }
+}
+
+void removeNewline(char *str) {
+  int len = strlen(str);
+  if (len > 0 && str[len - 1] == '\n') {
+    str[len - 1] = '\0';
+  }
+}
+
 int main() {
-  int n, a[270][270] = {0}, i, j, number = 1, b[1000] = {0}, k, ti, tj,
-         flag = 0;
-  scanf("%d", &n);
-  for (i = 0; i < n; i++) {
-    scanf("%d", &a[i][0]);
-    a[i][1] = a[i][0] * 8;
-    b[i] = a[i][1];
-    for (j = 2; j < a[i][1] + 2; j++) {
-      a[i][j] = -1;
-    }
+  char s1[120] = {0}, s2[120] = {0}, t[120] = {0};
+  int slen, llen, a[105] = {0}, i, j, times = 0, k, lcs = 0;
+
+  fgets(s1, sizeof(s1), stdin);
+  fgets(s2, sizeof(s2), stdin);
+  removeNewline(s1);
+  removeNewline(s2);
+
+  toUpper(s1);
+  toUpper(s2);
+
+  llen = (strlen(s1) >= strlen(s2) ? strlen(s1) : strlen(s2));
+  slen = (strlen(s1) < strlen(s2) ? strlen(s1) : strlen(s2));
+  if (strlen(s1) < strlen(s2)) {
+    strcpy(t, s1);
+    strcpy(s1, s2);
+    strcpy(s2, t);
   }
-  for (i = n - 1; i > 0; i--) {
-    if (b[i] > b[0]) {
-      b[0] = b[i];
-    }
-  }
-  for (j = 2; j < b[0] + 2; j++) {
-    for (i = 0; i < n; i++) {
-      if (a[i][j] == -1) {
-        a[i][j] = number;
-        number++;
-        if (a[i][j - 1] == number - 2) {
-          if (i == n - 1) {
-            a[i][j] = number;
-            number += 2;
-            ti = i;
-            tj = j;
-            flag = 1;
-            break;
+
+  for (i = 0; i < slen; i++) {
+    for (j = 0; j < llen; j++) {
+      if (s2[i] == s1[j]) {
+        for (k = j; k < llen; k++) {
+          if (s1[k] == s2[i + times]) {
+            times++;
+            if (times + i == slen) {
+              break;
+            }
           } else {
-            a[i][j - 1]++;
-            a[i][j] = number + 1;
-            number += 3;
-            ti = i;
-            tj = j;
-            flag = 1;
             break;
           }
         }
+        a[times]++;
+        times = 0;
       }
     }
-    if (flag == 1) {
+  }
+
+  for (i = slen; i >= 0; i--) {
+    if (a[i] != 0) {
+      lcs = i;
       break;
     }
   }
-  for (j = tj + 1; j < b[0] + 2; j++) {
-    a[ti][j] = number;
-    number += 2;
-  }
-  for (i = 0; i < n; i++) {
-    printf("#%d\n", i + 1);
-    k = 2;
-    while (k <= a[i][1]) {
-      for (j = k; j < k + 8; j++) {
-        printf("%d ", a[i][j]);
-      }
-      printf("\n");
-      k += 8;
-    }
-  }
+
+  float xsd = 2.0 * lcs / (slen + llen);
+  printf("%.3f\n", xsd);
+
   return 0;
 }
