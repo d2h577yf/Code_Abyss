@@ -273,3 +273,34 @@ int main() {
 >读取结束后，返回结果 x* f，其中 f 用来表示符号，如果输入的是负数，f 就是 -1，否则是 1。
 
 > ps:按照这个思路，通过修改可以对char，字母等等快速读取
+
+## 字符串快速读取（包括空格）
+
+```
+#include <stdio.h>
+
+#define MAX_LEN 1000000
+
+void read_string(char *str) {
+    char buffer[MAX_LEN];
+    int i = 0;
+
+    size_t n = fread(buffer, 1, MAX_LEN - 1, stdin);
+    for (size_t j = 0; j < n; ++j) {
+        if (buffer[j] == '\n' || buffer[j] == EOF) {
+            break;
+        }
+        str[i++] = buffer[j];
+    }
+
+    str[i] = '\0';
+}
+
+int main() {
+    char str[MAX_LEN];
+    printf("Enter a string: ");
+    read_string(str);
+    printf("You entered: %s\n", str);
+    return 0;
+}
+```
