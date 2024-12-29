@@ -44,7 +44,7 @@ void quickSort(int arr[], int low, int high, int ascending) {
 ## 埃拉托斯特尼筛法（Sieve of Eratosthenes）
 
 ```
-#define MAX_LIMIT XXXXXXXX
+
 
 bool book[MAX_LIMIT + 1];
 
@@ -277,8 +277,6 @@ int main() {
 ## 字符串快速读取（包括空格）
 
 ```
-#include <stdio.h>
-
 #define MAX_LEN 1000000
 
 void read_string(char *str) {
@@ -304,3 +302,39 @@ int main() {
     return 0;
 }
 ```
+
+## 快速判断是否是质数
+>
+> 用到的头文件
+>
+> stdbool.h
+>
+> math.h
+
+```
+
+bool is_prime(int num) {
+    if (num <= 1) return false;
+    if (num <= 3) return true;  
+    if (num % 2 == 0 || n % 3 == 0) return false;
+
+    for (int i = 5; i * i <= n; i += 6) {
+        if (num % i == 0 || num % (i + 2) == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+```
+
+- num:需要判断的数字
+- 返回是或者不是
+
+> 代码解读：
+>
+> 其实更像是一个数学问题
+>
+> 前两个if没什么好说的，<=1必然不是质数，2，3必然是质数，
+> 后面if:如果是2，3倍数必然不是质数
+>
+> 再次之后就精彩了，现在我们吧所有>3数字统一变成6n,6n+1,6n+2,6n+3,6n+4,6n+5(n为任意整数),而我们之前的%2，%3已经把6n,6n+2,6n+3,6n+4排除了，所以我们现在就是要判断6n+1,6n+5是不是num的因数，所以我们有一个循环i代表6n+5(6(n+1)-1),i+2代表6n+1
